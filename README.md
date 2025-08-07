@@ -63,9 +63,10 @@ En **psql**:
 
 ```bash
 \c ecomarket
-\i ruta/al/archivo/repo_ecoMarket.sql
 ```
-Para el comando \i, la ruta puede variar dependiendo de donde hayas guardado el .sql
+Despues, abrimos la base de datos "ecomarket" en pgAdmin, le hacemos clic derecho en RESTORE,
+seleccionamos el formato Plain y seleccionamos el script .sql que descargamos, con eso tendremos tanto estructura como registros.
+<img width="1039" height="437" alt="image" src="https://github.com/user-attachments/assets/4c4aef5a-ad6b-4e1d-a570-222a93cccd4e" />
 
 ---
 
