@@ -1,0 +1,80 @@
+body {
+  background-color: #f1f1f1;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3 {
+  color: #4CAF50;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+.btn-eco {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.btn-eco:hover {
+  background-color: #43a047;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+
+.text-eco {
+  color: #27ae60;
+}
+
+.bg-eco {
+  background-color: #27ae60 !important;
+  color: #fff !important;
+}
+
+.btn-eco {
+  background-color: #27ae60;
+  color: #fff;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-eco:hover, .btn-eco:focus {
+  background-color: #219150;
+  color: #fff;
+}
+
+.table-eco {
+  background-color: #eafaf1;
+}
+
+.border-eco {
+  border: 2px solid #27ae60 !important;
+}
+
+.card-title.text-eco {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.shadow {
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.15);
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 4px rgba(39, 174, 96, 0.10);
+}
+
+/* ...puedes agregar más estilos para formularios, navbar, etc... */

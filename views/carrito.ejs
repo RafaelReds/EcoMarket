@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<%- include('partials/navbar') %>
+
+  <% if (mensaje) { %>
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+     <%= mensaje %>
+     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+   </div>
+  <% } %>
+
+  <div class="container">
+    <h1 class="mb-4 text-eco"><i class="fa-solid fa-cart-shopping"></i> Tu Carrito de Compras</h1>
+    <% if (!carrito || carrito.length === 0) { %>
+      <div class="alert alert-info shadow-sm rounded">Tu carrito está vacío.</div>
+    <% } else { %>
+      <table class="table table-bordered align-middle d-none d-md-table shadow-sm rounded">
+        <thead class="table-eco">
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Disponible</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let total = 0; %>
+          <% carrito.forEach(item => { 
+            let subtotal = 0;
+            if (typeof item.precio === 'number' && typeof item.cantidad === 'number') {
+              subtotal = item.precio * item.cantidad;
+              total += subtotal;
+            }
+          %>
+          <tr>
+            <td class="fw-bold"><i class="fa fa-leaf text-success"></i> <%= item.nombre %></td>
+            <td>
+              <% if (typeof item.precio === 'number') { %>
+                <span class="badge bg-eco">$<%= item.precio.toFixed(2) %></span>
+              <% } else { %>
+                <span class="text-danger">Sin precio</span>
+              <% } %>
+            </td>
+            <td><%= item.cantidad %></td>
+            <td>
+              <% if (typeof subtotal === 'number' && !isNaN(subtotal)) { %>
+                $<%= subtotal.toFixed(2) %>
+              <% } else { %>
+                <span class="text-danger">Sin subtotal</span>
+              <% } %>
+            </td>
+            <td><span class="badge bg-secondary"><%= item.stock %></span></td>
+            <td>
+              <form action="/carrito/eliminar" method="POST">
+                <input type="hidden" name="id_producto" value="<%= item.id %>">
+                <button type="submit" class="btn btn-sm btn-danger shadow"><i class="fa fa-trash"></i> Eliminar</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3" class="text-end">Total:</th>
+            <th colspan="2">
+              <% if (typeof total === 'number' && !isNaN(total)) { %>
+                $<%= total.toFixed(2) %>
+              <% } else { %>
+                <span class="text-danger">Sin total</span>
+              <% } %>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+      <form action="/carrito/confirmar" method="POST">
+        <button type="submit" class="btn btn-eco w-100 shadow"><i class="fa fa-check"></i> Confirmar pedido</button>
+      </form>
+    <% } %>
+  </div>
+  
+  <!-- Versión móvil: tarjetas -->
+  <div class="d-md-none">
+    <% let totalMovil = 0; %>
+    <% carrito.forEach(item => { 
+      let subtotal = (typeof item.precio === 'number' && typeof item.cantidad === 'number') ? item.precio * item.cantidad : 0;
+      totalMovil += subtotal;
+    %>
+      <div class="card mb-3 shadow-sm rounded border-eco">
+        <div class="card-body">
+          <h5 class="card-title text-eco"><i class="fa fa-leaf"></i> <%= item.nombre %></h5>
+          <p class="card-text">Precio: 
+            <span class="badge bg-eco">
+              <% if (typeof item.precio === 'number') { %>
+                $<%= item.precio.toFixed(2) %>
+              <% } else { %>
+                <span class="text-danger">Sin precio</span>
+              <% } %>
+            </span>
+          </p>
+          <p class="card-text">Cantidad: <%= item.cantidad %></p>
+          <p class="card-text fw-bold">
+            Subtotal: 
+            <% if (typeof subtotal === 'number' && !isNaN(subtotal)) { %>
+              $<%= subtotal.toFixed(2) %>
+            <% } else { %>
+              <span class="text-danger">Sin subtotal</span>
+            <% } %>
+          </p>
+          <p class="text-muted">Disponible: <span class="badge bg-secondary"><%= item.stock %></span> unidades</p>
+          <form action="/carrito/eliminar" method="POST">
+            <input type="hidden" name="id_producto" value="<%= item.id %>">
+            <button type="submit" class="btn btn-sm btn-danger shadow"><i class="fa fa-trash"></i> Eliminar</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+    <div class="text-end mb-3">
+      <strong>
+        Total: 
+        <% if (typeof totalMovil === 'number' && !isNaN(totalMovil)) { %>
+          $<%= totalMovil.toFixed(2) %>
+        <% } else { %>
+          <span class="text-danger">Sin total</span>
+        <% } %>
+      </strong>
+    </div>
+  </div>
+
+</div>
+
+  <script src=

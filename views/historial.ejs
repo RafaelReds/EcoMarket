@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="container">
+   <h1 class="mb-4 text-eco"><i class="fa fa-history"></i> Historial de Compras</h1>
+
+
+    <% if (pedidos.length === 0) { %>
+      <div class="alert alert-info shadow-sm rounded">Aún no has realizado compras.</div>
+    <% } else { %>
+      <% pedidos.forEach(pedido => { %>
+        <div class="card mb-4 shadow-sm border-eco">
+          <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <div>
+              <strong class="text-eco">Pedido #<%= pedido.id %></strong>
+                <span class="ms-2 text-muted"><i class="fa fa-calendar"></i> <%= pedido.fecha %></span>
+            </div>
+            <span class="badge 
+              <% if (pedido.estado === 'pendiente') { %> bg-warning text-dark 
+              <% } else if (pedido.estado === 'enviado') { %> bg-info 
+              <% } else { %> bg-success <% } %>">
+               <i class="fa fa-truck"></i> <%= pedido.estado.toUpperCase() %>
+            </span>
+          </div>
+          <div class="card-body">
+            <ul class="list-group mb-3">
+              <% pedido.productos.forEach(prod => { %>
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between flex-wrap">
+                    <span><%= prod.nombre %> <span class="badge bg-secondary">x<%= prod.cantidad %></span></span>
+                    <span class="text-end">$<%= (prod.precio * prod.cantidad).toFixed(2) %></span>
+                 </div>
+               </li>
+              <% }) %>
+            </ul>
+
+            <%
+              let total = 0;
+               pedido.productos.forEach(p => {
+                total += p.precio * p.cantidad;
+               });
+            %>
+<p class="fw-bold text-end">Total: $<%= total.toFixed(2) %></p>
+
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

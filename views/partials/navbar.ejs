@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand">EcoMarket</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContenido">
+      <% if (user) { %>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if (user.rol === 'cliente') { %>
+            <li class="nav-item"><a href="/productos" class="nav-link">Catálogo</a></li>
+            <li class="nav-item"><a href="/carrito" class="nav-link">Carrito</a></li>
+            <li class="nav-item"><a href="/historial" class="nav-link">Historial</a></li>
+          <% } else if (user.rol === 'productor') { %>
+            <li class="nav-item"><a href="/productor/productos" class="nav-link">Mis productos</a></li>
+            
+            <li class="nav-item"><a href="/productor/pedidos" class="nav-link">Pedidos recibidos</a></li>
+          <% } %>
+        </ul>
+
+        <span class="navbar-text me-3">
+          <strong><%= user.nombre %></strong> (<%= user.rol %>)
+        </span>
+        <a href="/logout" class="btn btn-outline-light btn-sm">Cerrar sesión</a>
+
+      <% } else { %>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a href="/login" class="nav-link">Iniciar sesión</a></li>
+          <li class="nav-item"><a href="/registro" class="nav-link">Registrarse</a></li>
+        </ul>
+      <% } %>
+    </div>
+  </div>
+</nav>
