@@ -48,7 +48,7 @@ DB_PASSWORD=TU_CONTRASEÑA
 
 ###  **Crear la base de datos**
 
-1. Abrir **psql** o **pgAdmin**.
+1. Abrir **psql**.
 2. Crear una base de datos llamada `ecomarket`:
 
 ```sql
