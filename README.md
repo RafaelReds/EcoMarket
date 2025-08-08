@@ -80,6 +80,13 @@ npm install
 
 Esto instalará todos los paquetes necesarios definidos en `package.json`.
 
+En caso de que ocurra un error en el que Windows bloquea "npm.ps1" por motivos de seguridad,
+puede ejecutar el siguiente comando en PowerShell y despues volver a realizar npm install:
+```bash
+Set-ExecutionPolicy RemoteSigned
+```
+ADVERTENCIA: No es apto hacerlo si esta usando una maquina compartida.
+
 ---
 
 ###  **Iniciar el servidor**
