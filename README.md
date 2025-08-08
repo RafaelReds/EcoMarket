@@ -30,7 +30,7 @@ cd EcoMarket
 
 ###  **Configurar las variables de entorno**
 
-Crear un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+Modifique un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 
 ```env
 DB_HOST=localhost
@@ -40,7 +40,8 @@ DB_USER=postgres
 DB_PASSWORD=TU_CONTRASEÑA
 ```
 
-⚠️ **Nota**: Cambia `TU_CONTRASEÑA` por la contraseña real de tu usuario de PostgreSQL.
+⚠️ **Nota**: Cambia `TU_CONTRASEÑA` por la contraseña real de tu usuario de PostgreSQL; tanto el puerto, host y user son por defecto.
+
 ⚠️ Tambien se aplica para el usuario/DB_USER, en este caso, "postgres" 
 
 ---
@@ -59,12 +60,7 @@ CREATE DATABASE ecomarket;
 
 5. Ejecuta el script .sql descargado:
 
-En **psql**:
-
-```bash
-\c ecomarket
-```
-Despues, abrimos la base de datos "ecomarket" en pgAdmin, le hacemos clic derecho en RESTORE,
+Abrimos la base de datos "ecomarket" en pgAdmin, le hacemos clic derecho en RESTORE,
 seleccionamos el formato Plain y seleccionamos el script .sql que descargamos, con eso tendremos tanto estructura como registros.
 <img width="1039" height="437" alt="image" src="https://github.com/user-attachments/assets/4c4aef5a-ad6b-4e1d-a570-222a93cccd4e" />
 
@@ -85,7 +81,7 @@ puede ejecutar el siguiente comando en PowerShell y despues volver a realizar np
 ```bash
 Set-ExecutionPolicy RemoteSigned
 ```
-ADVERTENCIA: No es apto hacerlo si esta usando una maquina compartida.
+⚠️ No es apto hacerlo si esta usando una maquina compartida.
 
 ---
 
